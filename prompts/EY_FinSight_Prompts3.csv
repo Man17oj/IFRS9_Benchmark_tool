@@ -1,0 +1,1089 @@
+Bank,PromptName,PromptText
+HSBC,Scenario ECL,"Given the full document content provided, extract the Reported ECL, Central scenario, Upside scenario , Downside scenario , Downside 2 scenario  ECL (Provisions)  for the following categories: Retail analysis and Wholesale analysis, as reported for the latest period presented in the document. Focus specifically on sections titled ""Wholesale and retail sensitivity analysis"" within the document, as these sections contain the detailed breakdown of Reported ECL, Central scenario, Upside scenario , Downside scenario , Downside 2 scenario by category. Use the following guidelines:
+
+1. ECL refers to provisions on credit exposures for each category (Reported ECL, Central scenario, Upside scenario , Downside scenario , Downside 2 scenario), expressed in £m.
+4. Locate and extract the data directly from sections titled ""Wholesale and retail sensitivity analysis"". If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. If subcategories are present, sum them for Balance and ECL, and recalculate Coverage if table percentages are inconsistent.
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+6. ""Retail & Business Banking"" is split into Mortgages,EDB - Credit Cards, EDB - Other as separate rows within the table. validate totals against provided aggregates where possible.
+7. If both on balance sheet and off balance sheet numbers are present, show only the on balance sheet numbers. 
+8. Return the result as a JSON string with the following structure:
+   {
+       ""Wholesale analysis"": {
+       ""Reported ECL "": {""ECL"": ""<value>""},
+       ""Central scenario "": {""ECL"": ""<value>""},
+       ""Upside scenario "": {""ECL"": ""<value>""}
+       ""Downside scenario "": {""ECL"": ""<value>""}
+       ""Downside 2 scenario "": {""ECL"": ""<value>""}
+     },
+       ""Retail analysis"": {
+       ""Reported ECL "": {""ECL"": ""<value>""},
+       ""Central scenario "": {""ECL"": ""<value>""},
+       ""Upside scenario "": {""ECL"": ""<value>""}
+       ""Downside scenario "": {""ECL"": ""<value>""}
+       ""Downside 2 scenario "": {""ECL"": ""<value>""}   
+   },
+   }
+9. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+10. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+11. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+HSBC,Scenario Weight,"Given the full document content provided, extract the scenario weight for the  Central scenario, Upside scenario , Downside scenario , Downside 2 scenario  as reported for the latest period presented in the document. Use the following guidelines:
+1. Return the result as a JSON string with the following structure:
+   {
+       ""Scenario weights %"": {
+
+       ""Central "": {""Weight"": ""<value>""},
+       ""Upside "": {""Weight"": ""<value>""}
+       ""Downside "": {""Weight"": ""<value>""}
+       ""Downside 2  "": {""Weight"": ""<value>""}
+     }
+   }"
+Santander,Scenario ECL,"Given the full document content provided, extract the Upside, Base case, Downside 1, Downside 2 and Weighted ECL (Provisions) and Balance (Exposure) for the following categories: Retail & Business Banking, Mortgages, Consumer Finance, Corporate & Commercial Banking and Corporate Centre , as reported for the latest period presented in the document. Focus specifically on sections titled ""Scenario sensitivity"" within the document, as these sections contain the detailed breakdown of Upside, Base case, Downside 1, Downside 2 and Weighted by category. Use the following guidelines:
+
+1. ECL refers to provisions on credit exposures for each category (Retail & Business Banking, Mortgages, Consumer Finance, Corporate & Commercial Banking and Corporate Centre), expressed in £m.
+2. Balance refers to the Exposure for each stage and category, expressed in £m.
+4. Locate and extract the data directly from sections titled ""Scenario sensitivity"". If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. If subcategories are present, sum them for Balance and ECL, and recalculate Coverage if table percentages are inconsistent.
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+6. ""Retail & Business Banking"" is split into Mortgages,EDB - Credit Cards, EDB - Other as separate rows within the table. validate totals against provided aggregates where possible.
+7. If both on balance sheet and off balance sheet numbers are present, show only the on balance sheet numbers. 
+8. Return the result as a JSON string with the following structure:
+   {
+       ""Retail & Business Banking"": {
+       ""Upside"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Downside 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+       ""Downside 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+       ""Weighted"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+     },
+""Mortgages"": {
+       ""Upside"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Downside 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+       ""Downside 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+       ""Weighted"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+     },
+     "" Consumer Finance"": {
+       ""Upside"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Downside 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+       ""Downside 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+       ""Weighted"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+     },
+     "" Corporate & Commercial Banking "": {
+       ""Upside"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Downside 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+       ""Downside 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+       ""Weighted"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+     },
+     "" Corporate Centre "": {
+       ""Upside"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Downside 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+       ""Downside 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+       ""Weighted"": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+     },
+   }
+9. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+10. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+11. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Santander,Scenario Weight,"Given the full document content provided, extract the scenario weight for the  Upside , Base case , Downside 1 , Downside 2 scenario  as reported for the latest period presented in the document. Use the following guidelines:
+1. Return the result as a JSON string with the following structure:
+   {
+       ""Scenario weights %"": {
+
+       ""Upside "": {""Weight"": ""<value>""},
+       ""Base case "": {""Weight"": ""<value>""}
+       ""Downside 1"": {""Weight"": ""<value>""}
+       ""Downside 2  "": {""Weight"": ""<value>""}
+     }
+   }"
+Nationwide,Scenario ECL,"Given the full document content provided, extract the Upside scenario  , Base case scenario , Downside scenario , Severe Downside  scenario and reported Provisions  for the following categories: Residential mortgages, Consumer banking – credit cards , Consumer banking – personal loans and overdraft, Commercial lending, as reported for the latest period presented in the document. Focus specifically on sections titled ""ECL under 100% weighted scenarios "" within the document, as these sections contain the detailed breakdown of Upside scenario  , Base case scenario , Downside scenario , Severe Downside  scenario and reported Provisions. Use the following guidelines:
+
+1. ECL refers to provisions on credit exposures for each category (Residential mortgages, Consumer banking – credit cards , Consumer banking – personal loans and overdraft, Commercial lending), expressed in £m.
+4. Locate and extract the data directly from sections titled ""ECL under 100% weighted scenarios "". If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. If subcategories are present, sum them for Balance and ECL, and recalculate Coverage if table percentages are inconsistent.
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+
+7. If both on balance sheet and off balance sheet numbers are present, show only the on balance sheet numbers. 
+8. Return the result as a JSON string with the following structure:
+   {
+       ""Residential mortgages "": {
+       ""Upside scenario"": {""ECL"": ""<value>""},
+       ""Base case scenario"": {""ECL"": ""<value>""},
+       ""Downside scenario"": {""ECL"": ""<value>""}
+       ""Severe Downside scenario"": {""ECL"": ""<value>""}
+       ""Reported provisions"": {""ECL"": ""<value>""}
+     },
+       ""Consumer banking – credit cards "": {
+       ""Upside scenario"": {""ECL"": ""<value>""},
+       ""Base case scenario"": {""ECL"": ""<value>""},
+       ""Downside scenario"": {""ECL"": ""<value>""}
+       ""Severe Downside scenario"": {""ECL"": ""<value>""}
+       ""Reported provisions"": {""ECL"": ""<value>""}
+     },
+       ""Consumer banking – personal loans and overdraft "": {
+       ""Upside scenario"": {""ECL"": ""<value>""},
+       ""Base case scenario"": {""ECL"": ""<value>""},
+       ""Downside scenario"": {""ECL"": ""<value>""}
+       ""Severe Downside scenario"": {""ECL"": ""<value>""}
+       ""Reported provisions"": {""ECL"": ""<value>""}
+     },
+       ""Commercial lending "": {
+       ""Upside scenario"": {""ECL"": ""<value>""},
+       ""Base case scenario"": {""ECL"": ""<value>""},
+       ""Downside scenario"": {""ECL"": ""<value>""}
+       ""Severe Downside scenario"": {""ECL"": ""<value>""}
+       ""Reported provisions"": {""ECL"": ""<value>""}
+     },
+   }
+9. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+10. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+11. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Nationwide,Scenario Weight,"Given the full document content provided, extract the Scenario probability weighting (%)  for the  Upside scenario  , Base case scenario , Downside scenario , Severe Downside  scenario  as reported for the latest period presented in the document. Use the following guidelines:
+1. Return the result as a JSON string with the following structure:
+   {
+       ""Scenario weights %"": {
+       ""Upside scenario "": {""Weight"": ""<value>""},
+       ""Base case scenario"": {""Weight"": ""<value>""}
+       ""Downside scenario"": {""Weight"": ""<value>""}
+       ""Severe Downside scenario  "": {""Weight"": ""<value>""}
+     }
+   }"
+VMUK,Scenario ECL,"Given the full document content provided extract the Upside, Base, Downside, Severe Downside, and Probability Weighted impairment provisions for the following categories: Mortgages, Unsecured Lending – Cards, Unsecured Lending – Personal Loans and Overdrafts, and Business Lending, as reported for the latest period presented. Focus specifically on the table titled ""Economic scenarios"" under the section ""The calculation of the Group’s impairment provision,"" which contains the detailed breakdown of Upside, Base, Downside, Severe Downside, and Probability Weighted modelled provisions. Use the following guidelines:
+
+Locate and extract the data directly from the ""Economic scenarios"" table. The table provides the latest period data, so use only that period’s data. For the ""Unsecured"" category, break down the data into subcategories ""Cards"" and ""Personal loans and overdrafts"" as provided.
+If OCR errors or inconsistencies are detected (e.g., totals not aligning with category sums), adjust values to align with totals or logical consistency, and note adjustments.
+Show only on balance sheet numbers (the table does not indicate off balance sheet numbers, so this is assumed to be on balance sheet).
+Return the result as a JSON string with the following structure:  
+{
+    ""Mortgages"": {
+        ""Upside"": {""Impairment Provisions"": ""<value>""},
+        ""Base"": {""Impairment Provisions"": ""<value>""},
+        ""Downside"": {""Impairment Provisions"": ""<value>""},
+        ""Severe Downside"": {""Impairment Provisions"": ""<value>""},
+        ""Probability Weighted"": {""Impairment Provisions"": ""<value>""}
+    },
+    ""Unsecured Lending – Cards"": {
+        ""Upside"": {""Impairment Provisions"": ""<value>""},
+        ""Base"": {""Impairment Provisions"": ""<value>""},
+        ""Downside"": {""Impairment Provisions"": ""<value>""},
+        ""Severe Downside"": {""Impairment Provisions"": ""<value>""},
+        ""Probability Weighted"": {""Impairment Provisions"": ""<value>""}
+    },
+    ""Unsecured Lending – Personal Loans and Overdrafts"": {
+        ""Upside"": {""Impairment Provisions"": ""<value>""},
+        ""Base"": {""Impairment Provisions"": ""<value>""},
+        ""Downside"": {""Impairment Provisions"": ""<value>""},
+        ""Severe Downside"": {""Impairment Provisions"": ""<value>""},
+        ""Probability Weighted"": {""Impairment Provisions"": ""<value>""}
+    },
+    ""Business Lending"": {
+        ""Upside"": {""Impairment Provisions"": ""<value>""},
+        ""Base"": {""Impairment Provisions"": ""<value>""},
+        ""Downside"": {""Impairment Provisions"": ""<value>""},
+        ""Severe Downside"": {""Impairment Provisions"": ""<value>""},
+        ""Probability Weighted"": {""Impairment Provisions"": ""<value>""}
+    }
+}
+Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m).
+Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated totals), and validation against totals if applicable.
+If the required data is not found, state that the information is unavailable and explain why (e.g., missing section, lack of scenario breakdown)."
+VMUK,Scenario Weight,"Given the full document content provided  extract the scenario probability weightings (%) for the Upside, Base, Downside, and Severe Downside scenarios as reported for the latest period presented i nthe document. Use the following guidelines:
+1. Return the result as a JSON string with the following structure:
+{
+    ""Scenario weights %"": {
+        ""Upside"": {""Weight"": ""<value>""},
+        ""Base"": {""Weight"": ""<value>""},
+        ""Downside"": {""Weight"": ""<value>""},
+        ""Severe Downside"": {""Weight"": ""<value>""}
+    }
+}"
+NWG,Scenario ECL,"Given the full document content provided, extract the Moderate Upside Scenario, Base Scenario, Moderate Downside Scenario, Extreme Downside Scenario, and Actual Stage 1 and Stage 2 modelled ECL for the following categories: Mortgages, Unsecured Lending, Business Lending – Property, and Business Lending – Non-Property, as reported for the latest period presented in the table . Focus specifically on the table titled ""Measuring uncertainty and ECL sensitivity analysis (audited),"" which contains the detailed breakdown of Stage 1 and Stage 2 modelled ECL under the Base Scenario, Moderate Upside Scenario, Moderate Downside Scenario, Extreme Downside Scenario, and Actual values. Use the following guidelines:
+
+Locate and extract the data directly from the ""Measuring uncertainty and ECL sensitivity analysis (audited)"" table. The table provides the latest period data, so use only that period’s data. For the ""Retail Banking - unsecured"" category, use the total ECL provided (do not break down into subcategories like Cards or Personal Loans and Overdrafts, as the table does not provide this breakdown). For ""Business Lending,"" break down the data into ""Property"" and ""Non-Property"" subcategories as provided (using ""Non-personal - property"" and ""Non-personal - non-property"").
+If OCR errors or inconsistencies are detected (e.g., totals not aligning with category sums), adjust values to align with totals or logical consistency, and note adjustments.
+Show only on balance sheet numbers (the table does not indicate off balance sheet numbers, so this is assumed to be on balance sheet).
+Return the result as a JSON string with the following structure:
+{
+    ""Mortgages"": {
+        ""Moderate Upside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Base Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Moderate Downside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Extreme Downside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Actual"": {""Stage 1 and Stage 2 ECL"": ""<value>""}
+    },
+    ""Unsecured Lending"": {
+        ""Moderate Upside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Base Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Moderate Downside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Extreme Downside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Actual"": {""Stage 1 and Stage 2 ECL"": ""<value>""}
+    },
+    ""Business Lending – Property"": {
+        ""Moderate Upside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Base Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Moderate Downside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Extreme Downside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Actual"": {""Stage 1 and Stage 2 ECL"": ""<value>""}
+    },
+    ""Business Lending – Non-Property"": {
+        ""Moderate Upside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Base Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Moderate Downside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Extreme Downside Scenario"": {""Stage 1 and Stage 2 ECL"": ""<value>""},
+        ""Actual"": {""Stage 1 and Stage 2 ECL"": ""<value>""}
+    }
+}
+Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m).
+Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated totals), and validation against totals if applicable.
+If the required data is not found, state that the information is unavailable and explain why (e.g., missing section, lack of scenario breakdown)."
+NWG,Scenario Weight,"Given the full document content provided, extract the scenario probability weightings (%) for the Moderate Upside Scenario, Base Scenario, Moderate Downside Scenario, and Extreme Downside Scenario as reported in the document. Use the following guidelines:
+
+Search the document for a section or table that provides the scenario probability weightings for the scenarios labeled as ""Moderate Upside Scenario,"" ""Base Scenario,"" ""Moderate Downside Scenario,"" and ""Extreme Downside Scenario"" (as used in the ""Measuring uncertainty and ECL sensitivity analysis (audited)"" table). If the weightings are not found in the document, note that they are unavailable and refer to any previously provided data (e.g., a ""Scenario"" table with weightings for these scenarios).
+Return the result as a JSON string with the following structure:
+{
+    ""Scenario weights %"": {
+        ""Moderate Upside Scenario"": {""Weight"": ""<value>""},
+        ""Base Scenario"": {""Weight"": ""<value>""},
+        ""Moderate Downside Scenario"": {""Weight"": ""<value>""},
+        ""Extreme Downside Scenario"": {""Weight"": ""<value>""}
+    }
+}
+Express the weights as percentage strings without the '%' symbol (e.g., ""10"" for 10%).
+Include a note after the JSON detailing the data source (e.g., specific table or section) and any adjustments made if applicable. If the weightings are not found in the document, explicitly state this and reference any previously provided data (e.g., a ""Scenario"" table with weightings: Upside 10%, Base 55%, Downside 20%, Severe Downside 15%) that may align with the scenarios after adjusting for terminology differences.
+If the required data is not found, state that the information is unavailable and explain why (e.g., missing table, lack of scenario weights)."
+LBG,Scenario ECL,"Given the full document content provided , extract the Upside, Base, Downside, Severe Downside, and Probability-weighted ECL provisions for the following categories: UK Mortgages, Credit cards, Other Retail, and Commercial Banking, as reported for the latest period presented in the document. Focus specifically on the table titled ""Total expected credit loss allowance sensitivity to economic assumptions – statutory and underlying basis"", as this table contains the detailed breakdown of Upside, Base, Downside, Severe Downside, and Probability-weighted ECL provisions. Use the following guidelines:
+
+1. ECL refers to provisions on credit exposures for each category (UK Mortgages, Credit cards, Other Retail, Commercial Banking), expressed in £m.
+2. Locate and extract the data  from the table titled ""Total expected credit loss allowance sensitivity to economic assumptions – statutory and underlying basis"" . Use the latest period presented,""
+3. If OCR errors or inconsistencies are detected (e.g., totals not aligning with category sums), adjust values to align with totals or logical consistency, and note adjustments.
+4. If both on balance sheet and off balance sheet numbers are present, show only the on balance sheet numbers.
+5. Return the result as a JSON string with the following structure:
+   {
+       ""UK Mortgages"": {
+           ""Upside"": {""ECL"": ""<value>""},
+           ""Base"": {""ECL"": ""<value>""},
+           ""Downside"": {""ECL"": ""<value>""},
+           ""Severe Downside"": {""ECL"": ""<value>""},
+           ""Probability-weighted"": {""ECL"": ""<value>""}
+       },
+       ""Credit cards"": {
+           ""Upside"": {""ECL"": ""<value>""},
+           ""Base"": {""ECL"": ""<value>""},
+           ""Downside"": {""ECL"": ""<value>""},
+           ""Severe Downside"": {""ECL"": ""<value>""},
+           ""Probability-weighted"": {""ECL"": ""<value>""}
+       },
+       ""Other Retail"": {
+           ""Upside"": {""ECL"": ""<value>""},
+           ""Base"": {""ECL"": ""<value>""},
+           ""Downside"": {""ECL"": ""<value>""},
+           ""Severe Downside"": {""ECL"": ""<value>""},
+           ""Probability-weighted"": {""ECL"": ""<value>""}
+       },
+       ""Commercial Banking"": {
+           ""Upside"": {""ECL"": ""<value>""},
+           ""Base"": {""ECL"": ""<value>""},
+           ""Downside"": {""ECL"": ""<value>""},
+           ""Severe Downside"": {""ECL"": ""<value>""},
+           ""Probability-weighted"": {""ECL"": ""<value>""}
+       },
+       ""Other"": {
+           ""Upside"": {""ECL"": ""<value>""},
+           ""Base"": {""ECL"": ""<value>""},
+           ""Downside"": {""ECL"": ""<value>""},
+           ""Severe Downside"": {""ECL"": ""<value>""},
+           ""Probability-weighted"": {""ECL"": ""<value>""}
+       },
+   }
+
+6. Express monetary values in £m (millions) as strings without commas (e.g., ""1064"" for £1,064m).
+7. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated totals), and validation against totals if applicable.
+8. If the required data is not found, state that the information is unavailable and explain why (e.g., missing section, lack of scenario breakdown)."
+LBG,Scenario Weight,"Given the full document content provided, extract the scenario probability weightings (%) for the **Upside**, **Base**, **Downside**, and **Severe Downside** scenarios as reported in the document. Use the following guidelines:
+
+1. Search the document for a section or table that provides the scenario probability weightings, focusing on the ""Risk management"" section . If the weightings are not found in the document, note that they are unavailable and refer to any previously provided data (e.g., a ""Scenario"" table with weightings for these scenarios).
+2. Return the result as a JSON string with the following structure:
+
+   {
+       ""Scenario weights %"": {
+           ""Upside"": {""Weight"": ""<value>""},
+           ""Base"": {""Weight"": ""<value>""},
+           ""Downside"": {""Weight"": ""<value>""},
+           ""Severe Downside"": {""Weight"": ""<value>""}
+       }
+   }
+Express the weights as percentage strings without the '%' symbol (e.g., ""10"" for 10%).
+Include a note after the JSON detailing the data source (e.g., specific table or section) and any adjustments made if applicable. If the weightings are not found in the document, explicitly state this and reference any previously provided data (e.g., a ""Scenario"" table with weightings: Upside 10%, Base 55%, Downside 20%, Severe Downside 15%) that may align with the scenarios after adjusting for terminology differences.
+If the required data is not found, state that the information is unavailable and explain why (e.g., missing table, lack of scenario weights)."
+Principality,IFRS9 Data by Stage,"Given the full document content provided, extract the Gross loan balance,Loss allowance,by stage as well as total. Use the following guidelines:''is the ratio of Loss allowance to Gross loan balance (expressed as a percentage) for each stage and category. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled:  "" Provision for impairment losses"" For Stage 2, use the total values (e.g., 'Stage 2 total' or sum of subcategories like up to date, 1-30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Gross loan balance and Loss allowance and recalculate  if table percentages are inconsistent.  Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Group,,,,. Output the result as a JSON string with the following structure :
+   {
+     'Group': {
+       'Stage 1': {'Loss allowance': '<value>', 'Gross loan balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'Loss allowance': '<value>', 'Gross loan balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'Loss allowance': '<value>', 'Gross loan balance': '<value>', 'Coverage': '<value>'}
+     }
+   } 
+"
+Principality,Arrears Rates,"Given the full document content provided, extract the payment due status for the following categories:Group, as reported for the latest period presented in the document.Focus specifically on tables that  ""provides further information on the first and second charge retail loans secured on residential property by payment due status:"" within the document, as these sections contain the detailed breakdown of Gross exposure by payment due status. Use the following guidelines:
+1. Locate and extract the data directly from tables that ""provides further information on the first and second charge retail loans secured on residential property by payment due status: "" within the document. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. 
+2. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+3. Return the result as a JSON string with the following structure:
+   {
+     ""Group"": {
+       ""Current"": {""Balance"": ""<value>""},
+       ""Past due up to 3 months"": {""Balance"": ""<value>""},
+       ""Past due 3 months up to 6 months"": {""Balance"": ""<value>""},
+       ""Past due 6 months up to 12 months"":{""Balance"": ""<value>""},
+       ""Past due over 12 months "": {""Balance"": ""<value>""},
+       ""Possessions "": {""Balance"": ""<value>""},
+     }
+   }
+4. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+5. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+6. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Coventry,IFRS9 Data by Stage,"Given the full document content provided, extract the Stage 1, Stage 2, and Stage 3 ECL (Provisions), Balance (Gross Balances), and Coverage (Provisions as a % of total balance) for the following categories: Group, as reported for the latest period presented in the document. Focus specifically on tables labeled ""Movements in gross exposure and ECL provision"" within the document, as these tables contain the detailed breakdown of Provisions and Gross Balances by stage and category. Use the following guidelines:
+
+1. ECL refers to provisions on credit exposures for each stage (1, 2, 3) and category (Group), expressed in £m.
+2. Balance refers to the gross balances for each stage and category, expressed in £m.
+3. Coverage is the ratio of ECL to Balance (expressed as a percentage) for each stage and category.
+4. Locate and extract the data directly from tables titled""""Movements in gross exposure and ECL provision"". If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. For Stage 2, use the total values (e.g., ""Stage 2 total"" or sum of subcategories like up to date, Not past due, Past due) unless otherwise specified. If subcategories are present, sum them for Balance and ECL, and recalculate Coverage if table percentages are inconsistent.
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+6. Return the result as a JSON string with the following structure:
+   {
+     ""Group"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+   }
+7. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+8. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+9. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Leeds,IFRS9 Data by Stage,"Given the full document content provided, extract the Stage 1, Stage 2, and Stage 3 ECL (Impairment loss provision), Balance (Gross exposure ) and Coverage (Provision 
+coverage) for the following categories: Retail mortgages and Loan commitments, as reported for the latest period presented in the document. Focus specifically on tables that  ""summarises the Group’s retail mortgage balances, loan commitments and associated impairment loss provisions"" within the document, as these tables contain the detailed breakdown of Impairment loss provision, Gross exposure and Provision coverage by stage and category. Use the following guidelines:
+
+1. ECL refers to Impairment loss provision on credit exposures for each stage (1, 2, 3) and category (Retail mortgages and Loan commitments), expressed in £m.
+2. Balance refers to the Gross exposure for each stage and category, expressed in £m.
+3. Coverage is the ratio of ECL to Balance (expressed as a percentage) for each stage and category.
+4. Locate and extract the data directly from tables that ""summarises the Group’s retail mortgage balances, loan commitments and associated impairment loss provisions "" within the document. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. For Stage 2, use the total values (e.g., ""Stage 2 total"" or sum of subcategories like Stage 2 and <30 days past due, Stage 2 and 30+ days past due ) unless otherwise specified.  For Stage 3, use the total values (e.g., ""Stage 3 total"" or sum of subcategories like Stage 3 and <90 days past due, Stage 3 and 90+ days past due ) unless otherwise specified If subcategories are present, sum them for Balance and ECL, and recalculate Coverage if table percentages are inconsistent.
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+6. Return the result as a JSON string with the following structure:
+   {
+     ""Retail mortgages"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""Loan commitments"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+   }
+8. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+9. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+10. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Leeds,Arrears Rates,"Given the full document content provided, extract the Stage 1, Stage 2 and Stage 3 days past due for the following categories:Retail mortgages and Loan commitments, as reported for the latest period presented in the document.Focus specifically on tables that  ""summarises the Group’s retail mortgage balances, loan commitments and associated impairment loss provisions"" within the document, as these tables contain the detailed breakdown of Impairment loss provision, Gross exposure and Provision coverage by stage and category. Use the following guidelines:
+
+1. ECL refers to Impairment loss provision on credit exposures for each stage (1, 2, 3) and category (Retail mortgages and Loan commitments), expressed in £m.
+2. Balance refers to the Gross exposure for each stage and category, expressed in £m.
+3. Coverage is the ratio of ECL to Balance (expressed as a percentage) for each stage and category.
+4. Locate and extract the data directly from tables that ""summarises the Group’s retail mortgage balances, loan commitments and associated impairment loss provisions "" within the document. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. 
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+6. Return the result as a JSON string with the following structure:
+   {
+     ""Retail mortgages"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2 and <30 days past due"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2 and 30+ days past due"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3 and <90 days past due"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3 and 90+ days past due "": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""Loan commitments"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2 and <30 days past due"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2 and 30+ days past due"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3 and <90 days past due"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3 and 90+ days past due "": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+   }
+4. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+5. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+6. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Nationwide,IFRS9 Data by Stage,"Given the full document content provided, extract the Stage 1, Stage 2, and Stage 3 ECL (Provisions), Balance (Gross Balances), and Coverage (Provisions as a % of total balance) for the following categories: Owner-occupied, buy-to-let and legacy, Overdrawn current accounts, Personal Loans and Credit Cards, as reported for the latest period presented in the document. Focus specifically on tables labeled ""Consumer banking product and staging analysis""and ""Residential mortgages staging analysis"" within the document, as these tables contain the detailed breakdown of Provisions, Gross Balances and Provisions as a % of total balance by stage and category. Use the following guidelines:
+
+1. ECL refers to provisions on credit exposures for each stage (1, 2, 3) and category (Owner-occupied, buy-to-let and legacy, Overdrawn current accounts, Personal Loans and Credit Cards), expressed in £m.
+2. Balance refers to the gross balances for each stage and category, expressed in £m.
+3. Coverage is the ratio of ECL to Balance (expressed as a percentage) for each stage and category.
+4. Locate and extract the data directly from tables titled""Consumer banking product and staging analysis""and ""Residential mortgages staging analysis"". If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. For Stage 2, use the total values (e.g., ""Stage 2 total"" or sum of subcategories like up to date, 1-30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Balance and ECL, and recalculate Coverage if table percentages are inconsistent.
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+6. Assume ""Unsecured"" is split into Overdrawn current accounts, Personal Loans and Credit Cards as separate rowa within the table, and validate totals against provided aggregates where possible.
+7. Return the result as a JSON string with the following structure:
+   {
+     ""Owner-occupied"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""Buy-to-let and legacy"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""Overdrawn current accounts"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""Personal loans"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     }
+     ""Credit cards"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     }
+   }
+8. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+9. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+10. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Santander,IFRS9 Data by Stage,"Given the full document content provided, extract the Stage 1, Stage 2, and Stage 3 ECL (Provisions), Balance (Exposures), and Coverage  (Coverage Ratio) for the following categories: Mortgages,EDB - Credit Cards, EDB - Other, Consumer Finance, Corporate & Commercial Banking and Corporate Centre , as reported for the latest period presented in the document. Focus specifically on tables labeled ""Credit quality"" within the document, as these tables contain the detailed breakdown of ECL, Exposure and Coverage Ratio by stage and category. Use the following guidelines:
+
+1. ECL refers to provisions on credit exposures for each stage (1, 2, 3) and category (Mortgages,EDB - Credit Cards, EDB - Other, Consumer Finance, Corporate & Commercial Banking and Corporate Centre), expressed in £m.
+2. Balance refers to the Exposure for each stage and category, expressed in £m.
+3. Coverage is the ratio of ECL to Balance (expressed as a percentage) for each stage and category.
+4. Locate and extract the data directly from tables titled""Credit quality"""". If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. If subcategories are present, sum them for Balance and ECL, and recalculate Coverage if table percentages are inconsistent.
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+6. ""Retail & Business Banking"" is split into Mortgages,EDB - Credit Cards, EDB - Other as separate rows within the table. validate totals against provided aggregates where possible.
+7. If both on balance sheet and off balance sheet numvbers are present, show only the on balance shete numbers. 
+8. Return the result as a JSON string with the following structure:
+   {
+     ""Mortgages"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""EDB - Credit Cards"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""EDB - Other"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     "" Consumer Finance"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     }
+     "" Corporate & Commercial Banking "": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     }
+     "" Corporate Centre "": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     }
+   }
+9. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+10. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+11. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Skipton,IFRS9 Data by Stage,"Given the full document content provided, extract the Stage 1, Stage 2, and Stage 3 ECL (Loss allowance), Balance (Gross carrying amount) for the following categories: Residential mortgages, Other lending and Commercial mortgages, as reported for the latest period presented in the document. Focus specifically on tables that provide ""information on movements in the gross carrying amount"" and ""information on movements in the impairment loss allowance"" within the document, as these tables contain the detailed breakdown of Loss allowance and Gross carrying amount by stage and category. Use the following guidelines:
+
+1. ECL refers to Loss allowance on credit exposures for each stage (1, 2, 3) and category (Residential mortgages, Other lending and Commercial mortgages), expressed in £m.
+2. Balance refers to the Gross carrying amount for each stage and category, expressed in £m.
+3. Coverage is the ratio of ECL to Balance (expressed as a percentage) for each stage and category.
+4. Locate and extract the data directly from tables that provide ""information on movements in the gross carrying amount"" and ""information on movements in the impairment loss allowance"" within the document. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+6. If both Group and Society numbers are presented, provide results for the Group. 
+7. Return the result as a JSON string with the following structure:
+   {
+     ""Residential mortgages"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""Commercial mortgages"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""Other lending"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+   }
+8. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+9. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+10. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Skipton,Arrears Rates,"Given the full document content provided, extract the Stage 1, Stage 2, and Stage 3 days past due for the following categories: Residential mortgages, Other lending and Commercial mortgages, as reported for the latest period presented in the document. Focus specifically on tables that provide ""loans and advances by payment due status"" within the document, as these tables contain the detailed breakdown of days past due by stage and category. Use the following guidelines:
+
+1. Locate and extract the data directly from tables that provide ""loans and advances by payment due status"" within the document. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.
+2. If both Group and Society numbers are presented, provide results for the Group. 
+3. Return the result as a JSON string with the following structure:
+   {
+     ""Residential mortgages"": {
+       ""Stage 1"": {""Not past due "": ""<value>"", ""Up to 30 days past due"": ""<value>"", ""31 to 60 days past due"": ""<value>"", ""61 to 90 days past due"": ""<value>"", ""Over 90 days past due"": ""<value>"" },
+       ""Stage 2"": {""Not past due "": ""<value>"", ""Up to 30 days past due"": ""<value>"", ""31 to 60 days past due"": ""<value>"", ""61 to 90 days past due"": ""<value>"", ""Over 90 days past due"": ""<value>"" },
+       ""Stage 3"": {""Not past due "": ""<value>"", ""Up to 30 days past due"": ""<value>"", ""31 to 60 days past due"": ""<value>"", ""61 to 90 days past due"": ""<value>"", ""Over 90 days past due"": ""<value>"" }
+     },
+     ""Commercial mortgages"": {
+       ""Stage 1"": {""Not past due "": ""<value>"", ""Up to 30 days past due"": ""<value>"", ""31 to 60 days past due"": ""<value>"", ""61 to 90 days past due"": ""<value>"", ""Over 90 days past due"": ""<value>"" },
+       ""Stage 2"": {""Not past due "": ""<value>"", ""Up to 30 days past due"": ""<value>"", ""31 to 60 days past due"": ""<value>"", ""61 to 90 days past due"": ""<value>"", ""Over 90 days past due"": ""<value>"" },
+       ""Stage 3"": {""Not past due "": ""<value>"", ""Up to 30 days past due"": ""<value>"", ""31 to 60 days past due"": ""<value>"", ""61 to 90 days past due"": ""<value>"", ""Over 90 days past due"": ""<value>"" }
+     },
+     ""Other lending"": {
+       ""Stage 1"": {""Not past due "": ""<value>"", ""Up to 30 days past due"": ""<value>"", ""31 to 60 days past due"": ""<value>"", ""61 to 90 days past due"": ""<value>"", ""Over 90 days past due"": ""<value>"" },
+       ""Stage 2"": {""Not past due "": ""<value>"", ""Up to 30 days past due"": ""<value>"", ""31 to 60 days past due"": ""<value>"", ""61 to 90 days past due"": ""<value>"", ""Over 90 days past due"": ""<value>"" },
+       ""Stage 3"": {""Not past due "": ""<value>"", ""Up to 30 days past due"": ""<value>"", ""31 to 60 days past due"": ""<value>"", ""61 to 90 days past due"": ""<value>"", ""Over 90 days past due"": ""<value>"" }
+     },
+   }
+4. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+5. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+6. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+VMUK,IFRS9 Data by Stage,"Given the full document content provided, extract the Stage 1, Stage 2, and Stage 3 Expected Credit Loss (ECL), Balance (gross loans and advances), and Coverage (provision-to-loan ratio) for the following categories: Mortgages, Cards, Loans and Overdrafts, and Business, as reported for the latest period presented in the document. Focus specifically on tables labeled ""Gross loans and advances (1) ECL and coverage"" within the document, as these tables contain the detailed breakdown of ECL, Balance, and Coverage by stage and category. Use the following guidelines:
+
+1. ECL refers to impairment provisions on credit exposures for each stage (1, 2, 3) and category (Mortgages, Cards, Loans and Overdrafts, Business), expressed in £m.
+2. Balance refers to the gross loans and advances for each stage and category, expressed in £m.
+3. Coverage is the ratio of ECL to Balance (expressed as a percentage) for each stage and category.
+4. Locate and extract the data directly from tables titled ""Gross loans and advances (1) ECL and coverage."" If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. For Stage 2, use the total values (e.g., ""Stage 2 - total"" or sum of subcategories like 0 DPD, <30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Balance and ECL, and recalculate Coverage if table percentages are inconsistent.
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+6. Assume ""Unsecured"" is split into ""Cards"" and ""Loans and Overdrafts"" as separate columns within the table, and validate totals against provided aggregates where possible.
+7. Return the result as a JSON string with the following structure:
+   {
+     ""Mortgages"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""Cards"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""Loans and Overdrafts"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+     ""Business"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     }
+   }
+8. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+9. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+10. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Yorkshire,IFRS9 Data by Stage,"Given the full document content provided, extract the Stage 1, Stage 2, and Stage 3 ECL (ECL), Balance (Gross exposure ) and Coverage (Coverage) for the following categories: Retail mortgages and Loan commitments, as reported for the latest period presented in the document. Focus specifically on tables titled  ""Staging and POCI"" within the document, as these tables contain the detailed breakdown of ECL, Gross exposure and Coverage by stage and category. Use the following guidelines:
+
+1. ECL for each stage (1, 2, 3) and category (Retail mortgages and Loan commitments), expressed in £m.
+2. Balance refers to the Gross exposure for each stage and category, expressed in £m.
+3. Coverage is the ratio of ECL to Balance (expressed as a percentage) for each stage and category.
+4. Locate and extract the data directly from tables that ""summarises the Group’s retail mortgage balances, loan commitments and associated impairment loss provisions "" within the document. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. 
+5. Return the result as a JSON string with the following structure:
+   {
+     ""Group"": {
+       ""Stage 1"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 2"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""},
+       ""Stage 3"": {""ECL"": ""<value>"", ""Balance"": ""<value>"", ""Coverage"": ""<value>""}
+     },
+   }
+8. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+9. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+10. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Yorkshire,Arrears Rates,"Given the full document content provided, extract the Stage 1, Stage 2, and Stage 3 Balance (Gross exposure ) for the following categories: Group, as reported for the latest period presented in the document. Focus specifically on tables titled  ""Staging and POCI"" within the document, as these tables contain the detailed breakdown of  Gross exposure . Use the following guidelines:
+
+2. Balance refers to the Gross exposure for each stage and category, expressed in £m.
+4. Locate and extract the data directly from tables that ""summarises the Group’s retail mortgage balances, loan commitments and associated impairment loss provisions "" within the document. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. 
+6. Return the result as a JSON string with the following structure:
+   {
+     ""Group"": {
+       ""Stage 1"": {""Balance"": ""<value>""},
+       ""Stage 2"": {""Balance"": ""<value>""},
+       ""Less than 30 days past due"": {""Balance"": ""<value>""},
+       ""More than 30 days past due"": {"" ""Balance"": ""<value>""},
+       ""Stage 3"": {"" ""Balance"": ""<value>""},
+       ""Less than 30 days past due"": {""Balance"": ""<value>""},
+       ""30-90 days past due"": {""Balance"": ""<value>""}'
+       ""More than 90 days past due"": {""Balance"": ""<value>""}'
+     }
+   }
+4. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+5. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+6. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Nottingham,IFRS9 Data by Stage,"Given the full document content provided, extract the Gross carrying amount,Expected credit loss allowance,Coverage by stage as well as total. Use the following guidelines:'Coverage 'is the ratio of Expected credit loss allowance to Gross carrying amount (expressed as a percentage) for each stage and category. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled:  ""Provision for impairment losses on loans
+and advances to members"" For Stage 2, use the total values (e.g., 'Stage 2 total' or sum of subcategories like up to date, 1-30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Gross carrying amount and Expected credit loss allowance and recalculate Coverage  if table percentages are inconsistent.  Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Group and Society,,,,. Output the result as a JSON string with the following structure :
+   {
+     'Group and Society': {
+       'Stage 1': {'Expected credit loss allowance': '<value>', 'Gross carrying amount': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'Expected credit loss allowance': '<value>', 'Gross carrying amount': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'Expected credit loss allowance': '<value>', 'Gross carrying amount': '<value>', 'Coverage': '<value>'}
+     }
+   } 
+"
+Nottingham,Arrears Rates,"Given the full document content provided, extract the Stage 1, Stage 2 and Stage 3 days past due for the following categories:Group and Society, as reported for the latest period presented in the document.Focus specifically on tables that  ""provides information on retail gross loans and ECL stages split by the number of DPD:"" within the document, as these tables contain the detailed breakdown of Expected Credit Loss and Gross loans by stage and category. Use the following guidelines:
+
+1. ECL refers to Expected Credit Loss on credit exposures for each stage (1, 2, 3) and category (Group and Society), expressed in £m.
+2. Balance refers to the Gross loans for each stage and category, expressed in £m.
+3. Coverage is the ratio of ECL to Balance (expressed as a percentage) for each stage and category.
+4. Locate and extract the data directly from tables that ""provides information on retail gross loans and ECL stages split by the number of DPD: "" within the document. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. 
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+6. Return the result as a JSON string with the following structure:
+   {
+     ""Group and Society"": {
+       ""Stage 1 and < 30 days past due"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Stage 2 and <30 days past due"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Stage 2 and > 30 days past due"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Stage 3 and <90 days past due"": {""ECL"": ""<value>"", ""Balance"": ""<value>""},
+       ""Stage 3 and > 90 days past due "": {""ECL"": ""<value>"", ""Balance"": ""<value>""}
+     }
+   }
+4. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+5. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+6. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Nottingham,Scenario ECL,"Given the full document content provided, extract the  IFRS 9 weighted average, Base , Downside  , Severe Downside and Upside  scenario and reported ECL provision  for the following categories: Group and Society, as reported for the latest period presented in the document. Focus specifically on sections titled ""the impact of applying 100% of a particular scenario on the 31st December 2024 reported ECL position output is shown below "" within the document, as these sections contain the detailed breakdown of FRS 9 weighted average, Base , Downside  , Severe Downside and Upside  scenario and reported ECL provision. Use the following guidelines:
+
+1. ECL refers to ECL provisions on credit exposures for each category (Group and Society), expressed in £m.
+4. Locate and extract the data directly from sections titled ""the impact of applying 100% of a particular scenario "". If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. If subcategories are present, sum them for Balance and ECL, and recalculate Coverage if table percentages are inconsistent.
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+
+7. If both on balance sheet and off balance sheet numbers are present, show only the on balance sheet numbers. 
+8. Return the result as a JSON string with the following structure:
+   {
+       ""Group and Society "": {
+       ""IFRS 9 weighted average"": {""ECL"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>""},
+       ""Downside "": {""ECL"": ""<value>""},
+       ""Severe Downside"": {""ECL"": ""<value>""},
+       ""Upside"": {""ECL"": ""<value>""}
+     }
+   }
+9. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+10. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+11. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Nottingham,Scenario Weight,"Given the full document content provided, extract the Scenario probability weighting (%)  for the  Upside  , Base  , Downside and Severe Downside   as reported for the latest period presented in the document. Use the following guidelines:
+1. Return the result as a JSON string with the following structure:
+   {
+       ""Scenario weights %"": {
+       ""Upside "": {""Weight"": ""<value>""},
+       ""Base"": {""Weight"": ""<value>""}
+       ""Downside"": {""Weight"": ""<value>""}
+       ""Severe Downside"": {""Weight"": ""<value>""}
+     }
+   }"
+Leeds,Scenario ECL,"Given the full document content provided, extract the (Decrease)/increase in impairment loss provisions if scenarios are weighted 100%: for the follwoing scenarios: Central scenario, Growth scenario , Downside scenario , Alternative Downside scenario  for the following categories: Group, as reported for the latest period presented in the document. Focus specifically on sections titled ""(Decrease)/increase in impairment loss provisions if scenarios are weighted 100%:"" within the document, as these sections contain the detailed breakdown of Central scenario, Growth scenario , Downside scenario , Alternative Downside scenario  by category. Use the following guidelines:
+
+1. ECL refers to provisions on credit exposures for each category (Reported ECL, Central scenario, Growth scenario , Downside scenario , Alternative Downside scenario), expressed in £m.
+4. Locate and extract the data directly from sections titled ""(Decrease)/increase in impairment loss provisions if scenarios are weighted 100%"". If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. If subcategories are present, sum them for Balance and ECL, and recalculate Coverage if table percentages are inconsistent.
+5. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+6. If cannot find the data by category, show the aggregate numbers. validate totals against provided aggregates where possible.
+7. If both on balance sheet and off balance sheet numbers are present, show only the on balance sheet numbers.
+8. Return the result as a JSON string with the following structure:
+   {
+       ""Group"": {
+       ""Reported ECL "": {""ECL"": ""<value>""},
+       ""Central scenario "": {""100% Impact"": ""<value>""},
+       ""Growth scenario "": {""100% Impact"": ""<value>""},
+       ""Downside scenario "": {""100% Impact"": ""<value>""},
+       ""Alternative Downside scenario "": {""100% Impact"": ""<value>""}
+     }
+   }
+9. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+10. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+11. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Leeds,Scenario Weight,"Given the full document content provided, extract the scenario weight for the  Central scenario, Upside scenario , Downside scenario , Alternative Downside scenario  as reported for the latest period presented in the document. Use the following guidelines:
+1. Return the result as a JSON string with the following structure:
+   {
+       ""Scenario weights %"": {
+       ""Central scenario "": {""Weight"": ""<value>""},
+       ""Growth scenario"": {""Weight"": ""<value>""}
+       ""Downside scenario"": {""Weight"": ""<value>""}
+       ""Alternative Downside  scenario"": {""Weight"": ""<value>""}
+     }
+   }"
+Coventry,Scenario ECL,"Given the full document content provided, extract the Weighted average ECL, Base scenario ECL, Upside scenario ECL, Downside scenario ECL, and Severe downside scenario ECL (Provisions) for the category **Retail analysis** (representing the total mortgage portfolio ECL), as reported for the latest period (31 December 2024) presented in the document. Focus specifically on tables within the section titled **""14. Impairment on loans and advances to customers""**, particularly the table on **page 156 under ""31 December 2024 Scenarios"" showing ""Total ECL (£m)"" by scenario** OR the table on **page 155 showing ""IFRS 9 provision £m"" for 31 December 2024**. Use the following guidelines:
+
+1. ECL refers to provisions on credit exposures for each scenario category (Weighted average, Base, Upside, Downside, Severe downside), expressed in £m.
+2. Locate and extract the data directly from the specified tables. The table on page 156 (""31 December 2024 Scenarios"") is the preferred source for ""Total ECL (£m)"". If this specific breakdown is not found, the table on page 155 (""IFRS 9 provision £m"" for 31 December 2024 scenarios) can be used.
+3. If OCR errors or inconsistencies are detected (e.g., unclear ECL values), prioritize values that align with totals or logical consistency if possible, and note adjustments.
+4. As Coventry Building Society's primary business is retail mortgages and savings, ""Retail analysis"" will represent the total portfolio ECLs. ""Wholesale analysis"" is not expected to be detailed in the same manner for scenario ECLs.
+5. If both on balance sheet and off balance sheet numbers are present for these specific scenario ECLs, show only the on balance sheet numbers. (Note: For Coventry, the ECL tables referenced are typically aggregated).
+6. Return the result as a JSON string with the following structure. If ""Wholesale analysis"" data is not found for scenario ECLs, provide an empty object for it.
+   {
+       ""Wholesale analysis"": {},
+       ""Retail analysis"": {
+           ""Weighted average ECL"": {""ECL"": ""<value>""},
+           ""Base scenario ECL"": {""ECL"": ""<value>""},
+           ""Upside scenario ECL"": {""ECL"": ""<value>""},
+           ""Downside scenario ECL"": {""ECL"": ""<value>""},
+           ""Severe downside scenario ECL"": {""ECL"": ""<value>""}
+       }
+   }
+7. Express monetary values in £m (millions) as strings without commas (e.g., ""24.3"" for £24.3m).
+8. Include a note after the JSON detailing the data source (e.g., specific table and page number), any adjustments made due to OCR errors or inconsistencies, and state that ""Retail analysis"" represents the total portfolio for Coventry Building Society as per the available scenario ECL breakdown.
+9. If you don't know the answer for a specific value, use ""null"" or state that the specific breakdown is not available. Do not try to make up an answer."
+Coventry,Scenario Weight,"""Given the full document content provided, extract the scenario weight for the  Central scenario, Upside scenario , Downside scenario , Alternative Downside scenario  as reported for the latest period presented in the document. Use the following guidelines:
+1. Return the result as a JSON string with the following structure:
+   {
+       """"Scenario weights %"""": {
+
+       """"Central """": {""""Weight"""": """"<value>""""},
+       """"Upside """": {""""Weight"""": """"<value>""""}
+       """"Downside """": {""""Weight"""": """"<value>""""}
+       """"Alternative Downside  """": {""""Weight"""": """"<value>""""}
+     }
+   }"""
+Yorkshire,Arrears Rates,"Given the full document content provided, extract the Stage 1, Stage 2, and Stage 3 Balance (Gross exposure ) for the following categories: Group, as reported for the latest period presented in the document. Focus specifically on tables titled  ""Staging and POCI"" within the document, as these tables contain the detailed breakdown of  Gross exposure . Use the following guidelines:
+
+2. Balance refers to the Gross exposure for each stage and category, expressed in £m.
+4. Locate and extract the data directly from tables that ""summarises the Group’s retail mortgage balances, loan commitments and associated impairment loss provisions "" within the document. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. 
+6. Return the result as a JSON string with the following structure:
+   {
+     ""Group"": {
+       ""Stage 1"": {""Balance"": ""<value>""},
+       ""Stage 2"": {""Balance"": ""<value>""},
+       ""Less than 30 days past due"": {""Balance"": ""<value>""},
+       ""More than 30 days past due"": {"" ""Balance"": ""<value>""},
+       ""Stage 3"": {"" ""Balance"": ""<value>""},
+       ""Less than 30 days past due"": {""Balance"": ""<value>""},
+       ""30-90 days past due"": {""Balance"": ""<value>""}'
+       ""More than 90 days past due"": {""Balance"": ""<value>""}'
+     }
+   }
+4. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+5. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+6. If you don't know the answer, just say that you don’t know, don’t try to make up an answer."
+Yorkshire,Scenario Weight,"Given the full document content provided, extract the scenario probability weightings (%) for the Upside Scenario, Core Scenario,  Downside Scenario, and Severe Downside Scenario as reported for the latest period in the document. Use the following guidelines:
+
+1. Search the document for a section or table that provides the scenario probability weightings for the scenarios labeled as ""Upside ,"" ""Core,"" ""Downside,"" and ""Severe Downside "" . This should be in the table that is found under the following text ""For completeness they have been included as a uniform adjustment across each scenario"". If the weightings are not found in the document, note that they are unavailable and refer to any previously provided data (e.g., a ""Scenario"" table with weightings for these scenarios).
+Return the result as a JSON string with the following structure:
+{
+    ""Weighting %"": {
+        ""Upside"": {""Weight"": ""<value>""},
+        ""Core"": {""Weight"": ""<value>""},
+        ""Downside"": {""Weight"": ""<value>""},
+        ""Severe Downside"": {""Weight"": ""<value>""}
+    }
+}
+Express the weights as percentage strings without the '%' symbol (e.g., ""10"" for 10%).
+Include a note after the JSON detailing the data source (e.g., specific table or section) and any adjustments made if applicable. If the weightings are not found in the document, explicitly state this and reference any previously provided data (e.g., a ""Scenario"" table with weightings: Upside 10%, Base 55%, Downside 20%, Severe Downside 15%) that may align with the scenarios after adjusting for terminology differences.
+If the required data is not found, state that the information is unavailable and explain why (e.g., missing table, lack of scenario weights)."
+Klarna,IFRS9 Data by Stage,"Given the full document content provided, extract the Gross Exposures,Allowance,Coverageby stage as well as total. Use the following guidelines:'Coverage'is the ratio of Allowance to Gross Exposures (expressed as a percentage) for each stage and category. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled:  "" Note 20, Loan to the public. Group Level."" For Stage 2, use the total values (e.g., 'Stage 2 total' or sum of subcategories like up to date, 1-30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Gross Exposures and Allowance and recalculate Coverage if table percentages are inconsistent.  Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Group. Output the result as a JSON string with the following structure :
+   {
+     'Group': {
+       'Stage 1': {'Allowance': '<value>', 'Gross Exposures': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'Allowance': '<value>', 'Gross Exposures': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'Allowance': '<value>', 'Gross Exposures': '<value>', 'Coverage': '<value>'}
+     }
+   } 
+"
+Revolut,IFRS9 Data by Stage,"Given the full document content provided, extract the Gross carrying amount,ECL,ECL Coverage % by stage as well as total. Use the following guidelines:'ECL Coverage %'is the ratio of ECL to Gross carrying amount (expressed as a percentage) for each stage and category. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled:  "" Note 31.1 ""Credit Risk"" (specifically in the ""Credit quality analysis"" tables)"" For Stage 2, use the total values (e.g., 'Stage 2 total' or sum of subcategories like up to date, 1-30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Gross carrying amount and ECL and recalculate ECL Coverage % if table percentages are inconsistent.  Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Treasury investments,Loans (including BNPL),Credit Cards. Output the result as a JSON string with the following structure :
+   {
+     'Treasury investments': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+     'Loans (including BNPL)': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+     'Credit Cards': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+   } "
+Revolut,Scenario ECL,"Given the full document content provided, extract the Baseline,Optimistic,Pessimistic, and reported provisions.  Use the following guidelines: If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled:  ""Sensitivity analysis towards macroeconomic scenarios"" 
+ Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Treasury investments,Loans (including BNPL),Credit Cards. Return the result as a JSON string with the following structure:
+   {
+       ""Treasury investments "": {
+       ""100% Baseline"": {""ECL"": ""<value>""},
+       ""100% Optimistic "": {""ECL"": ""<value>""}
+       ""100% Pessimistic"": {""ECL"": ""<value>""}
+       ""Current weights"": {""ECL"": ""<value>""}
+     },
+       ""Loans (including BNPL)"": {
+       ""100% Baseline"": {""ECL"": ""<value>""},
+       ""100% Optimistic "": {""ECL"": ""<value>""}
+       ""100% Pessimistic"": {""ECL"": ""<value>""}
+       ""Current weights"": {""ECL"": ""<value>""}
+     },
+       ""Credit Cards "": {
+       ""100% Baseline"": {""ECL"": ""<value>""},
+       ""100% Optimistic "": {""ECL"": ""<value>""}
+       ""100% Pessimistic"": {""ECL"": ""<value>""}
+       ""Current weights"": {""ECL"": ""<value>""}
+     }
+   }"
+Revolut,Scenario Weight,"Given the full document content provided, extract the Scenario weights for the Baseline,Optimistic and Pessimistic scenario. Use the following guidelines: If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer. Output the result as a JSON string with the following structure:
+   {
+       ""Scenario weights %"": {
+       ""Baseline "": {""Weight"": ""<value>""},
+       ""Optimistic"": {""Weight"": ""<value>""}
+       ""Pessimistic"": {""Weight"": ""<value>""}
+     }
+   }"
+Monzo,IFRS9 Data by Stage,"Given the full document content provided, extract the Gross carrying amount,Impairment allowance,Coverage by stage as well as total. Use the following guidelines:ECL is defined as the Impairment allowance ,Balance is defined as Gross carrying amount,Coverageis the ratio of ECL to Balance (expressed as a percentage) for each stage and category. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled:  "" Analysis of overdrafts and loans by stage"" For Stage 2, use the total values (e.g., 'Stage 2 total' or sum of subcategories like up to date, 1-30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Gross carrying amount and Impairment allowance and recalculate Coverage if table percentages are inconsistent.  If overdrafts, loans or flex impairment allowance includes values for undrawn elements, add the undrawn element to the impairment by stage for each porduct and each stage and recalculate coverage. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Overdrafts ,Loans,Flex. Output the result as a JSON string with the following structure :
+   {
+     'Overdrafts': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+     'Loans': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+     'Flex': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+   } 
+"
+Monzo,Scenario ECL,"Given the full document content provided, extract the Upside,Base,Downside 1,Downside 2 and reported provisions.  Use the following guidelines: If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled: "" Sensitivity tables show the modelled ECL (including in-model adjustments but excluding post- model adjustments)""
+ Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Overdrafts ,Loans,Flex. Return the result as a JSON string with the following structure:
+   {
+       ""Overdrafts "": {
+       ""Upside "": {""ECL"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>""},
+       ""Downside 1"": {""ECL"": ""<value>""}
+       "" Downside 2"": {""ECL"": ""<value>""}
+       ""Reported provisions"": {""ECL"": ""<value>""}
+     },
+       ""Loans"": {
+       ""Upside"": {""ECL"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>""},
+       ""Downside 1"": {""ECL"": ""<value>""}
+       ""Downside 2"": {""ECL"": ""<value>""}
+       ""Reported provisions"": {""ECL"": ""<value>""}
+     },
+       ""Flex "": {
+       ""Upside"": {""ECL"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>""},
+       ""Downside 1"": {""ECL"": ""<value>""}
+       ""Downside 2"": {""ECL"": ""<value>""}
+       ""Reported provisions"": {""ECL"": ""<value>""}
+     }
+   }"
+Monzo,Scenario Weight,"Given the full document content provided, extract the Scenario weight for the Upside,Base,Downside 1and Downside 2. Use the following guidelines: If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer. Output the result as a JSON string with the following structure:
+   {
+       ""Scenario weights %"": {
+       ""Upside "": {""Weight"": ""<value>""},
+       ""Base"": {""Weight"": ""<value>""}
+       ""Downside 1"": {""Weight"": ""<value>""}
+       ""Downside 2  "": {""Weight"": ""<value>""}
+     }
+   }"
+Starling,IFRS9 Data by Stage,"Given the full document content provided, extract the Gross carrying value,Impairment provision,Coverageby stage as well as total. Use the following guidelines:ECL is defined as the Impairment provision ,Balance is defined as Exposure after Gaurantee, Coverageis the ratio of ECL to Balance (expressed as a percentage) for each stage and category. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled:  "" Staging profile of customer lending (audited)"" For Stage 2, use the total values (e.g., 'Stage 2 total' or sum of subcategories like up to date, 1-30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Balance and ECL and recalculate Coverage if table percentages are inconsistent.  Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Mortgage,SME ,Retail and Undrawn. Output the result as a JSON string with the following structure :
+   {
+     'Mortgage': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+     'SME ': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+     'Retail ': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+     'Undrawn ': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     }
+   } 
+"
+Starling,Scenario ECL,"Given the full document content provided, extract the Upside,Base,Downside,Severe Downside and Weighted provisions.  Use the following guidelines: If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled: ""ECL Sensitivities""
+ Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Mortgage ,SME ,Retail ,. Return the result as a JSON string with the following structure:
+   {
+       ""Mortgage  "": {
+       ""Upside "": {""ECL"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>""},
+       ""Downside"": {""ECL"": ""<value>""}
+       ""Severe Downside"": {""ECL"": ""<value>""}
+       ""Weighted"": {""ECL"": ""<value>""}
+     },
+       ""SME "": {
+       ""Upside"": {""ECL"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>""},
+       ""Downside"": {""ECL"": ""<value>""}
+       ""Severe Downside"": {""ECL"": ""<value>""}
+       ""Weighted"": {""ECL"": ""<value>""}
+     },
+       ""Retail  "": {
+       ""Upside"": {""ECL"": ""<value>""},
+       ""Base"": {""ECL"": ""<value>""},
+       ""Downside"": {""ECL"": ""<value>""}
+       ""Severe Downside"": {""ECL"": ""<value>""}
+       ""Weighted"": {""ECL"": ""<value>""}
+     }
+   }"
+Starling,Scenario Weight,"Given the full document content provided, extract the Scenario weight for the Upside,Base,Downside and Severe Downside. Use the following guidelines: If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer. Output the result as a JSON string with the following structure:
+   {
+       ""Scenario weights %"": {
+       ""Upside "": {""Weight"": ""<value>""},
+       ""Base"": {""Weight"": ""<value>""}
+       ""Downside"": {""Weight"": ""<value>""}
+       ""Severe Downside "": {""Weight"": ""<value>""}
+     }
+   }"
+OakNorth,IFRS9 Data by Stage,"Given the full document content provided, extract the Gross carrying value,Impairment provision,Coverage as Impairment provision divided by Gross carrying value by stage as well as total. 
+Use the following guidelines: ECL is defined as the """"Allowance for ECL"""" ,Balance is defined as """"On balance sheet- Loans and advances at amortised cost"""", Coverage is the ratio of ECL to Balance (expressed as a percentage) for each stage. If multiple periods are present, identify the latest period by the most recent date (e.g., """"""""As at [date]"""""""") or context (e.g., """"""""current period"""""""" vs. """"""""prior period""""""""), and use only that period’s data.  Focus on sections titled:  """""""" Staging profile of customer lending (audited)"""""""" For Stage 2, use the total values (e.g., 'Stage 2 total' or sum of subcategories like up to date, 1-30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Balance and ECL and recalculate Coverage if table percentages are inconsistent.  Express monetary values in £m (millions) as strings without commas (e.g., """"""""52370"""""""" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., """"""""0.84%"""""""").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Mortgage,SME ,Retail and Undrawn. Output the result as a JSON string with the following structure :
+   {
+     'Total Loan Book': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     }
+	 "
+OakNorth,Scenario ECL,"Given the full document content provided, extract the Upside ,Baseline ,Downside 1 and Downside 2  and Weighted provisions.  Use the following guidelines: If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled: ""ECL Sensitivities""
+ Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Mortgage ,SME ,Retail ,. Return the result as a JSON string with the following structure:
+   {
+       ""Total Loan Book  "": {
+       ""Upside "": {""ECL"": ""<value>""},
+       ""Baseline"": {""ECL"": ""<value>""},
+       ""Downside 1"": {""ECL"": ""<value>""}
+       ""Downside 2"": {""ECL"": ""<value>""}
+       ""Weighted"": {""ECL"": ""<value>""}
+     }
+   }"
+OakNorth,Scenario Weight,"Given the full document content provided, extract the Scenario weight for the Upside,Baseline,Downside 1 and Downside 2. Use the following guidelines: If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer. Output the result as a JSON string with the following structure:
+   {
+       ""Scenario weights %"": {
+       ""Upside "": {""Weight"": ""<value>""},
+       ""Baseline"": {""Weight"": ""<value>""}
+       ""Downside 1"": {""Weight"": ""<value>""}
+       ""Downside 2"": {""Weight"": ""<value>""}
+     }
+   }"
+Aldermore,IFRS9 Data by Stage,"Given the full document content provided, extract the Balance as Gross carrying amount,ECL as Provisions,  Coverage as Provisions divded by  Gross carrying amount by stage as well as total. Use the following guidelines:ECL is defined as the Provisions  ,Balance is defined as Gross carrying amount,Coverageis the ratio of Provisions to Gross carrying amount (expressed as a percentage) for each stage and category. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled:  "" Analysis of overdrafts and loans by stage"" For Stage 2, use the total values (e.g., 'Stage 2 total' or sum of subcategories like up to date, 1-30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Gross carrying amount and Impairment allowance and recalculate Coverage if table percentages are inconsistent.  If overdrafts, loans or flex impairment allowance includes values for undrawn elements, add the undrawn element to the impairment by stage for each porduct and each stage and recalculate coverage. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Overdrafts ,Loans,Flex. Output the result as a JSON string with the following structure :
+   {
+     'Total loan book': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     }
+   } "
+Aldermore,Scenario ECL,
+Aldermore,Scenario Weight,
+Shawbrook,IFRS9 Data by Stage,"Given the full document content provided, extract the Balance as Gross carrying amount,ECL as Loss allowance,  Coverage as Loss allowance divded by  Gross carrying amount by stage as well as total. Use the following guidelines:ECL is defined as the Impairment allowance ,Balance is defined as Gross carrying amount,Coverageis the ratio of Loss allowance to Gross carrying amount (expressed as a percentage) for each stage and category. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled:  "" Analysis of overdrafts and loans by stage"" For Stage 2, use the total values (e.g., 'Stage 2 total' or sum of subcategories like up to date, 1-30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Gross carrying amount and Impairment allowance and recalculate Coverage if table percentages are inconsistent.  If overdrafts, loans or flex impairment allowance includes values for undrawn elements, add the undrawn element to the impairment by stage for each porduct and each stage and recalculate coverage. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Overdrafts ,Loans,Flex. Output the result as a JSON string with the following structure :
+   {
+     'Real Estate': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+     'SME': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+     'Consumer Finance': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },'Retail Mortgage Brands': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     }
+   } "
+Shawbrook,Scenario ECL,"Given the full document content provided, extract the Upside  , Base , Downside, Severe Downside  scenario and reported Provisions  for the following categories:Real Estate, SME ,Consumer Finance and Retail Mortgage Brands  as reported for the latest period presented in the document. Focus specifically on sections titled ""ECL under 100% weighted scenarios "" within the document, as these sections contain the detailed breakdown of Upside scenario  , Base case scenario , Downside scenario , Severe Downside  scenario and reported Provisions. Use the following guidelines:
+
+1. ECL refers to provisions on credit exposures for each category (Real Estate, SME ,Consumer Finance and Retail Mortgage Brands ), expressed in £m.
+2. Locate and extract the data directly from sections titled ""ECL under 100% weighted scenarios "". If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data. If subcategories are present, sum them for Balance and ECL, and recalculate Coverage if table percentages are inconsistent.
+3. If OCR errors or inconsistencies are detected (e.g., Coverage percentages not matching ECL/Balance, unclear ECL values), prioritize calculated Coverage (ECL/Balance) over table-provided percentages, adjusting ECL or Balance where necessary to align with totals or logical consistency, and note adjustments.
+4. Do compute the final number as per point 6 if ""Probability – weighted loss allowance per statement of financial position"" and ""Increase/(decrease) in loss allowance if scenario weighted at 100%"" by sum or difference based on increase and decrease.
+5. If both on balance sheet and off balance sheet numbers are present, show only the on balance sheet numbers. 
+6. Return the result as a JSON string with the following structure:
+   {
+       ""Real Estate"": {
+       ""Upside scenario"": {""ECL"": ""<value>""},
+       ""Base case scenario"": {""ECL"": ""<value>""},
+       ""Downside scenario"": {""ECL"": ""<value>""}
+       ""Severe Downside scenario"": {""ECL"": ""<value>""}
+       ""Reported provisions"": {""ECL"": ""<value>""}
+     },
+       ""SME"": {
+       ""Upside scenario"": {""ECL"": ""<value>""},
+       ""Base case scenario"": {""ECL"": ""<value>""},
+       ""Downside scenario"": {""ECL"": ""<value>""}
+       ""Severe Downside scenario"": {""ECL"": ""<value>""}
+       ""Reported provisions"": {""ECL"": ""<value>""}
+     },
+       ""Consumer Finance"": {
+       ""Upside scenario"": {""ECL"": ""<value>""},
+       ""Base case scenario"": {""ECL"": ""<value>""},
+       ""Downside scenario"": {""ECL"": ""<value>""}
+       ""Severe Downside scenario"": {""ECL"": ""<value>""}
+       ""Reported provisions"": {""ECL"": ""<value>""}
+     },
+       ""Retail Mortgage Brands"": {
+       ""Upside scenario"": {""ECL"": ""<value>""},
+       ""Base case scenario"": {""ECL"": ""<value>""},
+       ""Downside scenario"": {""ECL"": ""<value>""}
+       ""Severe Downside scenario"": {""ECL"": ""<value>""}
+       ""Reported provisions"": {""ECL"": ""<value>""}
+     },
+   }
+9. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").
+10. Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.
+11. If you don't know the answer, just say that you don’t know, don’t try to make up an answer.
+
+"
+Shawbrook,Scenario Weight,"Given the full document content provided, extract the economic scenarios probability weighting (%)  for the  Upside  , Base , Downside , Severe Downside  scenario  as reported for the latest period presented in the document. Use the following guidelines:
+1. Return the result as a JSON string with the following structure:
+   {
+       ""Scenario weights %"": {
+       ""Upside"": {""Weight"": ""<value>""},
+       ""Base"": {""Weight"": ""<value>""}
+       ""Downside"": {""Weight"": ""<value>""}
+       ""Severe Downside"": {""Weight"": ""<value>""}
+     }
+   }"
+MetroBank,IFRS9 Data by Stage,"Given the full document content provided, extract the Balance as Gross carrying amount,ECL as ECL allowance,  Coverage as ECL allowance divided by Gross carrying amount by stage as well as total. Use the following guidelines:ECL is defined as the Impairment allowance ,Balance is defined as Gross carrying amount,Coverageis the ratio of Loss allowance to Gross carrying amount (expressed as a percentage) for each stage and category. If multiple periods are present, identify the latest period by the most recent date (e.g., ""As at [date]"") or context (e.g., ""current period"" vs. ""prior period""), and use only that period’s data.  Focus on sections titled:  "" Analysis of overdrafts and loans by stage"" For Stage 2, use the total values (e.g., 'Stage 2 total' or sum of subcategories like up to date, 1-30 DPD, >30 DPD) unless otherwise specified. If subcategories are present, sum them for Gross carrying amount and Impairment allowance and recalculate Coverage if table percentages are inconsistent.  If overdrafts, loans or flex impairment allowance includes values for undrawn elements, add the undrawn element to the impairment by stage for each porduct and each stage and recalculate coverage. Express monetary values in £m (millions) as strings without commas (e.g., ""52370"" for £52,370m), and Coverage as a percentage string with two decimal places (e.g., ""0.84%"").  Include a note after the JSON detailing the data source (e.g., specific table), any adjustments made due to OCR errors or inconsistencies (e.g., recalculated Coverage, adjusted ECL), and validation against totals if applicable.  If you don't know the answer, just say that you don’t know, don’t try to make up an answer.  Extract data for the following portfolios: Overdrafts ,Loans,Flex. Output the result as a JSON string with the following structure :
+   {
+     'Retail mortgages': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+     'Consumer lending': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     },
+     'Commercial lending': {
+       'Stage 1': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 2': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'},
+       'Stage 3': {'ECL': '<value>', 'Balance': '<value>', 'Coverage': '<value>'}
+     }
+   } "
+MetroBank,Scenario ECL,
+MetroBank,Scenario Weight,"Given the full document content provided, extract the economic scenarios probability weighting (%) applied for the  Upside  , Baseline , Downside , Severe Downside  scenario  as reported for the latest period presented in the document. Use the following guidelines:
+1. Return the result as a JSON string with the following structure:
+   {
+       """"Scenario weights %"""": {
+       """"Upside"""": {""""Weight"""": """"<value>""""},
+       """"Baseline"""": {""""Weight"""": """"<value>""""}
+       """"Downside"""": {""""Weight"""": """"<value>""""}
+       """"Severe Downside"""": {""""Weight"""": """"<value>""""}
+     }
+   }"

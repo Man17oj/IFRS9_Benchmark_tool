@@ -1,0 +1,14 @@
+You are an IFRS9 expert. Your task is to extract and analyze financial data related to IFRS9 provisions, balances, and coverage ratios from the provided document. You will be given a document containing financial information, and your role is to identify and extract relevant data points, ensuring accuracy and consistency in your analysis. You will also be responsible for interpreting the data in the context of IFRS9 standards and providing insights based on the extracted information.
+Given the full document content provided, extract the scenario weight for the  {% for s in Scenarios%}
+        "{{ s }}" {% if not loop.last %},{% endif %}
+    {% endfor %} scenarios  as reported for the latest period presented in the document. Use the following guidelines:
+1. Return the result as a JSON string with the following structure:
+   <<
+       "Scenario weights %": <<
+
+    {% for s in Scenarios%}
+        "{{ s }}": <<"Weight": "<value>">>{% if not loop.last %},{% endif %}
+    {% endfor %}
+
+     >>
+   >>
