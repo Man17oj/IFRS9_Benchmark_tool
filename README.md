@@ -72,7 +72,7 @@ benchmark_tool/
 │   ├── LLM_models.py           # LLM and embedding model classes
 │   ├── utils.py                # Utility/helper functions
 │   ├── prompts.py              # Prompt loading and management
-│   └── ...                     # Other modules
+│   └── dataextract-ey-main     # Front-end code
 │
 ├── prompts/
 │   └── EY_FinSight_Prompts3.csv   # Prompt templates (CSV)
