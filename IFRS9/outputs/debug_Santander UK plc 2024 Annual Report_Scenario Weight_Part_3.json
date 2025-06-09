@@ -1,0 +1,16 @@
+{
+  "Scenario weights %": {
+    "Upside ": {
+      "Weight": "15"
+    },
+    "Base case ": {
+      "Weight": "50"
+    },
+    "Downside 1": {
+      "Weight": "25"
+    },
+    "Downside 2  ": {
+      "Weight": "10"
+    }
+  }
+}

@@ -1,0 +1,137 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 14%;
+
+    --primary: 52 100% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 240 10% 14%;
+
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 0 0% 96%;
+    --accent-foreground: 240 10% 14%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 52 100% 50%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 28%; /* #474747 - Outer Space */
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 28%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 28%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 52 100% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 52 100% 50%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* Apply dark mode universally to ensure all elements get the dark background */
+  .dark body,
+  .dark .bg-white {
+    @apply bg-[#474747];
+  }
+  
+  /* Make buttons yellow with black text in dark mode - fixed to avoid circular dependency */
+  .dark button[data-state="active"] {
+    background-color: #FFE600;
+    color: black;
+  }
+  
+  .dark .bg-yellow-400 {
+    background-color: #FFE600;
+    color: black;
+  }
+  
+  /* Ensure yellow backgrounds always use black text for contrast */
+  .bg-yellow-50, 
+  .bg-yellow-100, 
+  .bg-yellow-200, 
+  .bg-yellow-300, 
+  .bg-yellow-400, 
+  .bg-yellow-500 {
+    color: black;
+  }
+}
+
+@layer components {
+  .ey-button {
+    @apply bg-ey-yellow hover:bg-ey-yellow/90 text-ey-black font-semibold py-2 px-4 rounded-md transition-colors;
+  }
+  
+  .ey-input {
+    @apply border border-ey-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-ey-yellow;
+  }
+
+  .ey-card {
+    @apply bg-white rounded-lg shadow-md p-6 border border-ey-gray-300 hover:shadow-lg transition-shadow dark:bg-background dark:border-ey-gray-700;
+  }
+}

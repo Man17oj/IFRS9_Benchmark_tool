@@ -1,0 +1,4 @@
+Bank,PromptName,ECL_Name,balance_name,coverage_name,Table_Name,portfolios
+Aldermore,IFRS9 Data by Stage,Provisions,Gross carrying amount,Provisions divded by  Gross carrying amount,Group impairment coverage ratio,Total
+Shawbrook,IFRS9 Data by Stage,Loss allowance,Gross carrying amount,Loss allowance divded by  Gross carrying amount,Total loans and advances to customers,"Real Estate,SME,Consumer Finance,Retail Mortgage Brands"
+MetroBank,IFRS9 Data by Stage,ECL allowance,Gross carrying amount,ECL allowance divided by Gross carrying amount,Expected credit losses,"Retail mortgages,Consumer lending,Corporate lending"
